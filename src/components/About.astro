@@ -1,0 +1,148 @@
+---
+import { Image } from "astro:assets";
+import fotoCv from "../assets/Foto_CV.jpg";
+---
+
+<div class="principal-container">
+    <div class="about-container">
+        <Image src={fotoCv} alt={"Foto CV"} width={400} height={400} class={"image"}/>
+        <div class="first-information">
+            <p>Hola, soy <span class="name">Franco Itria</span></p>
+            <p>Desarrollador Full Stack</p>
+            <p class="text-secodnary">de aplicaciones web y sistemas orientados a resolver necesidades reales de negocio.</p>
+            <div class="buttons">
+                <button>Descargar CV</button>
+            </div>
+        </div>
+    </div>
+    <p class="first-parraf">
+        Soy Franco Itria, tengo 25 años y actualmente me encuentro a dos materias de 
+        recibirme como Técnico en Desarrollo Web en la Universidad Nacional de Entre Ríos. 
+        Comencé mis estudios universitarios en 2023, aunque mi camino en la programación 
+        empezó en 2021, formándome de manera autodidacta a través de cursos, práctica 
+        constante y el desarrollo de distintos proyectos.
+    </p>
+    <p class="second-parraf">
+        Soy una persona detallista, autocrítica y orientada a la mejora continua. 
+        Cuando cometo un error, busco entenderlo, solucionarlo y aprender de la experiencia. 
+        Me adapto rápidamente a nuevas tecnologías y herramientas, y disfruto seguir 
+        aprendiendo para poder aplicar nuevos conocimientos de manera práctica.
+    </p>
+</div>
+
+<style>
+    .principal-container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .about-container{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .image {
+        border-radius: 100%;
+        border: 0.3rem var(--border) solid;
+    }
+
+    .name {
+        font-size: 4rem;
+        color: var(--text);
+        text-decoration: underline 0.4rem;
+    }
+
+    .first-information p:first-child {
+        font-size: 3rem;
+    }
+
+    .first-information p:nth-child(2) {
+        color: var(--text);
+    }
+    
+    .first-information p {
+        margin: 5px;
+    }
+
+    .first-information {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+    }
+
+    .text-secodnary {
+        text-align: center;
+    }
+
+    .buttons {
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+
+<script>
+    import gsap from "gsap";
+    import {SplitText} from "gsap/SplitText";
+    gsap.registerPlugin(SplitText)
+
+    window.addEventListener("loader-finished", () => {
+        gsap.fromTo(
+            ".image", 
+            {y: -1000},
+            {y: 0, duration: 1.5, delay: 0.5}
+        );
+
+        gsap.fromTo(
+            ".first-information", 
+            {y: 1300},
+            {y: 0, duration: 1.5, delay: 1.1}
+        );
+
+        let split: SplitText | undefined;
+        let animation: gsap.core.Tween | undefined;
+        function setup() {
+            split?.revert();
+            animation?.revert();
+            
+            // 1. Primero creás el split
+            split = SplitText.create(".first-parraf", {
+                type: "lines"
+            });
+        
+            // 2. Después animás sus líneas
+            animation = gsap.from(split.lines, {
+                rotationX: -100,
+                transformOrigin: "50% 50% -160px",
+                opacity: 0,
+                duration: 2,
+                ease: "power3.out",
+                stagger: 0.5,
+                delay: 2.5
+            });
+            
+            split = SplitText.create(".second-parraf", {
+                type: "lines"
+            });
+        
+            // 2. Después animás sus líneas
+            animation = gsap.from(split.lines, {
+                rotationX: -100,
+                transformOrigin: "50% 50% -160px",
+                opacity: 0,
+                duration: 2,
+                ease: "power3.out",
+                stagger: 0.5,
+                delay: 4.5
+            });
+            }
+        setup();
+    })
+
+</script>

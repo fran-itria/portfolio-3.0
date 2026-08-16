@@ -13,7 +13,7 @@ const name = "Franco Itria"
         <span class="loader" id="loader-bar"></span>
     </span>
     <p id="loader-number">0 %</p>
-    <p id="click-here">Click para ver la página</p>
+    <!-- <p id="click-here">Click para ver la página</p> -->
 </div>
 
 <style>
@@ -88,7 +88,7 @@ const name = "Franco Itria"
     const loader = document.querySelector<HTMLElement>("#page-loader");
     const loaderBar = document.querySelector<HTMLElement>("#loader-bar");
     const loaderNumber = document.querySelector<HTMLElement>("#loader-number");
-    const clickHere = document.querySelector<HTMLElement>("#click-here")
+    // const clickHere = document.querySelector<HTMLElement>("#click-here")
 
     let progress = 0;
     let pageLoaded = false
@@ -108,7 +108,7 @@ const name = "Franco Itria"
     });
 
     const interval = setInterval(() => {
-        if (!loaderBar || !loaderNumber || !clickHere) return;
+        if (!loaderBar || !loaderNumber) return;
 
 
         // Cada vez avanza un poco menos
@@ -134,8 +134,20 @@ const name = "Franco Itria"
                 duration: 0.2
             });
 
-            clickHere.style.opacity = "1"
+            // clickHere.style.opacity = "1"
             clearInterval(interval);
+
+            gsap.to("#page-loader", {
+                y: -1000,
+                duration: 0.4,
+                stagger: {
+                    each: 0.07,
+                    yoyo: true
+                },
+                delay: 0.5
+            });
+            
+            window.dispatchEvent(new Event("loader-finished"))
         }
     }, 100);
 
@@ -148,14 +160,4 @@ const name = "Franco Itria"
         }, remaining);
     });
 
-    window.addEventListener("click", () => {
-            gsap.to("#page-loader", {
-                y: -1000,
-                duration: 0.4,
-                stagger: {
-                    each: 0.07,
-                    yoyo: true
-                }
-            });
-    })
 </script>
