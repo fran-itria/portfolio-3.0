@@ -34,3 +34,8 @@
     --text-secondary: #BDB4B7;
     --border: #33272A;
 }
+
+p {
+    font-size: 1.5rem;
+    padding: 0;
+}
