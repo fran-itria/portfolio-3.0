@@ -1,10 +1,20 @@
 ---
 import About from '../components/About.astro';
 import Loader from '../components/Loader.astro';
+import NavBar from '../components/NavBar.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
+	<NavBar />
 	<Loader />
-	<About />
+	 <div class="rest-components">
+		 <About />
+	</div>
 </Layout>
+
+<style>
+	.rest-components {
+		padding-inline: 5rem;
+	}
+</style>

@@ -36,12 +36,14 @@ import fotoCv from "../assets/Foto_CV.jpg";
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        margin-top: 7rem;
     }
 
     .about-container{
         display: flex;
         width: 100%;
         justify-content: center;
+        z-index: 1;
     }
 
     .image {
@@ -96,7 +98,7 @@ import fotoCv from "../assets/Foto_CV.jpg";
         gsap.fromTo(
             ".image", 
             {y: -1000},
-            {y: 0, duration: 1.5, delay: 0.5}
+            {y: 0, duration: 1.5, delay: 1}
         );
 
         gsap.fromTo(

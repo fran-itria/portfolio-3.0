@@ -1,0 +1,108 @@
+---
+import "../styles/global.css";
+import { Icon } from "astro-icon/components";
+---
+
+<div class="navbar-container">
+    <div class="buttons">
+            <Icon name="fa6-solid:moon" size={25} class={"icon-moon"} id={"icon-moon"}/>
+            <Icon name="fa6-solid:sun" size={25} class={"icon-sun"} id={"icon-sun"}/>
+    <button class="language-button" id="language-button">Es</button>
+    </div>
+    <div class="texts" id="texts">
+        <a>Sobre mi</a>
+        <a>Proyectos</a>
+        <a>Habilidades</a>
+        <a>Trayectoria</a>
+        <a>Contacto</a>
+    </div>
+</div>
+
+<style>
+    .navbar-container {
+        background-color: var(--border);
+        height: 4.5rem;
+        width: 100%;
+        position: fixed;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 5rem;
+    }
+
+    .buttons{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .icon-moon {
+        display: inline;
+        color: var(--primary);
+    }
+    .icon-sun {
+        display: none;
+        color: var(--primary);
+    }
+
+    .language-button {
+        padding-inline: 1rem;
+        padding-block: 0.2rem;
+        user-select: none;
+    }
+
+    .texts {
+        color: var(--primary);
+        font-weight: bold;
+        width: 30%;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        user-select: none;
+    }
+    .texts:hover {
+       cursor: pointer;
+    }
+</style>
+
+<script>
+    import gsap from "gsap";
+    import {SplitText} from "gsap/SplitText";
+    
+    const language = document.querySelector<HTMLButtonElement>(".language-button")
+    const moon = document.querySelector<HTMLButtonElement>(".icon-moon")
+    const sun = document.querySelector<HTMLButtonElement>(".icon-sun")
+    const texts = document.querySelector<HTMLButtonElement>(".texts")
+
+
+    gsap.registerPlugin(SplitText)
+
+    window.addEventListener("loader-finished", () => {
+        gsap.fromTo(
+            ".navbar-container", 
+            {y: -1000},
+            {y: 0, duration: 1.5}
+        );
+    })
+
+    moon?.addEventListener("click", () => {
+        if(!moon || !sun || !language || !texts) return
+        moon.style.display = "none"
+        sun.style.display = "inline"
+        sun.style.color = "white"
+        language.style = "color: white; border-color: white"
+        texts.style = "color: white"
+        document.documentElement.setAttribute("data-theme", "dark");
+    })
+    sun?.addEventListener("click", () => {
+        if(!moon || !sun || !language || !texts) return
+        moon.style.display = "inline"
+        sun.style.display = "none"
+        language.style = "color: var(--primary); border-color: var(--primary)"
+        texts.style = "color: var(--primary)"
+        document.documentElement.setAttribute("data-theme", "light");
+    })
+    language?.addEventListener("click", () => {
+        language.textContent = language.textContent == "Es" ? "En" : "Es"
+    })
+</script>
