@@ -92,6 +92,9 @@ const name = "Franco Itria"
 
     let progress = 0;
     let pageLoaded = false
+
+    // Bloquea el scroll mientras el loader esta en pantalla
+    document.body.classList.add("loader-active");
     
     const startTime = Date.now();
     const minimumLoaderTime = 1500;
@@ -147,6 +150,7 @@ const name = "Franco Itria"
                 delay: 0.5
             });
             
+            document.body.classList.remove("loader-active");
             window.dispatchEvent(new Event("loader-finished"))
         }
     }, 100);

@@ -9,7 +9,7 @@
 
     --text: #231B1D;
     --text-secondary: #695B5E;
-    --border: #E7DADB;
+    --border: #e7dadb;
 
     --radius-sm: 8px;
     --radius-md: 14px;
@@ -54,4 +54,9 @@ button {
 
 * {
     box-sizing: border-box;
+}
+
+/* El Loader agrega esta clase mientras esta visible y la quita al terminar */
+body.loader-active {
+    overflow: hidden;
 }

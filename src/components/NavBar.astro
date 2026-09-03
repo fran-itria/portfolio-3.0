@@ -20,15 +20,19 @@ import { Icon } from "astro-icon/components";
 
 <style>
     .navbar-container {
-        background-color: var(--border);
+        background-color: color-mix(in srgb, var(--border) 60%, transparent);
         height: 4.5rem;
-        width: 100%;
         position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         z-index: 2;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-inline: 5rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);;
     }
 
     .buttons{

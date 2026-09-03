@@ -1,7 +1,8 @@
 ---
-import About from '../components/About.astro';
 import Loader from '../components/Loader.astro';
 import NavBar from '../components/NavBar.astro';
+import About from '../components/About.astro';
+import Proyects from '../components/Proyects.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -10,11 +11,15 @@ import Layout from '../layouts/Layout.astro';
 	<Loader />
 	 <div class="rest-components">
 		 <About />
+		 <Proyects />
 	</div>
 </Layout>
 
 <style>
 	.rest-components {
 		padding-inline: 5rem;
+		/* 4.5rem del navbar fijo + aire */
+		padding-top: 7rem;
+		padding-bottom: 5rem;
 	}
 </style>
