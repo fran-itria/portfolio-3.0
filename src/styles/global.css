@@ -32,13 +32,18 @@
 
     --text: #F7F3F4;
     --text-secondary: #BDB4B7;
-    --border: #151515;
+    --border: #141414;
 }
 
 p {
     font-size: 2rem;
     padding: 0;
     color: var(--text-secondary);
+}
+
+h2 {
+    font-size: 4rem;
+    color: var(--primary);
 }
 
 button {
@@ -50,6 +55,12 @@ button {
     color: var(--primary);
     font-weight: bold;
     font-size: 1rem;
+}
+
+button:hover {
+    background-color: var(--primary);
+    color: var(--surface);
+    cursor: pointer;
 }
 
 * {

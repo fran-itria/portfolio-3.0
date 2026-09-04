@@ -1,0 +1,194 @@
+---
+import { Icon } from "astro-icon/components";
+const projects = [
+        {
+            image: "/path/to/image1.jpg",
+            name: "Smart Store",
+            description: `Plataforma integral de gestión comercial y e-commerce, con control de productos, stock, ventas y cuotas.
+                Integración con Mercado Pago, GoCuotas y Correo Argentino. 
+                Implementación de automatizaciones y notificaciones para 
+                el seguimiento de operaciones. 
+                <> Actualmente en desarrollo`,
+            technologies: ["Typescript", "Nest.Js", "TypeOrm", "Firebase", "Mercadopago"],
+            web: "https://example.com/project1",
+            code: "https://example.com/project1"
+        },
+        {
+            image: "/path/to/image1.jpg",
+            name: "Mates Paraná",
+            description: `Plataforma integral de gestión comercial y ventas para 
+                administrar productos, usuarios, pedidos y stock. 
+                Incluye pagos con Payway, gestión de transferencias, 
+                actualización automática de órdenes, integración con Correo Argentino, 
+                notificaciones por email y un panel administrativo con métricas del negocio.`,
+            technologies: ["Typescript", "Nest.Js", "Sequelize", "React", "TailwindCSS"],
+            web: "https://example.com/project1",
+            code: "https://example.com/project1"
+        },
+        {
+            image: "/path/to/image1.jpg",
+            name: "Mona Studio",
+            description: `Desarrollo del backend de una plataforma de gestión comercial, 
+                con integración de pagos mediante Mercado Pago, 
+                notificaciones automáticas por correo electrónico y administración 
+                de productos, usuarios, órdenes y servicios.`,
+            technologies: ["Typescript", "Nest.Js", "TypeOrm", "Firebase", "Mercadopago"],
+            web: "https://example.com/project1",
+            code: "https://example.com/project1"
+        }
+    ];
+---
+
+<div>
+    <h2>Proyectos</h2>
+    <div class="projects">
+        {projects.map( project => (
+            <div class="project-card">
+                {/* <Image /> */}
+                <div class="image">
+                    <p>Logo</p>
+                </div>
+                <p class="project-name" data-name="">{project.name}</p>
+                    {
+                        project.description.includes("Actualmente en desarrollo") 
+                        ?
+                        <>
+                            <p class="description">
+                                {project.description.split("<>")[0]}
+                                <span class="actually">{project.description.split("<>")[1]}</span>
+                            </p>
+                        </> 
+                        :
+                        <p class="description">{ project.description }</p>
+                    }
+                {/* Tecnologías */}
+                <div class="technologies">
+                    {project.technologies?.map(tech => (
+                        <Icon name={`local:${tech}`} size={40} title={tech} class="icon"/>
+                    ))}
+                </div>
+                <div class="buttons">
+                    <a href={project.web} target="_blank" rel="noopener noreferrer">
+                        Web
+                    </a>
+                    <a href={project.code} target="_blank" rel="noopener noreferrer">
+                        Código
+                    </a>
+                </div>
+            </div>
+        ))}
+    </div>
+</div>
+
+
+<style>
+    .projects {
+        display: flex;
+        justify-content: space-between;
+        /* gap: 40px; */
+    }
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+        background-color: var(--surface-secondary);
+        border: solid var(--border-width) var(--border);
+        border-radius: var(--radius-sm);
+        width: 25rem;
+        height: 40rem;
+        animation: animation-card-2 forwards 0.3s;
+    }
+
+    .project-card:hover {
+        animation: animation-card forwards 0.3s;
+    }
+
+    @keyframes animation-card {
+        to {
+            box-shadow: var(--border) 10px 10px 10px;
+        }
+    }
+    
+    @keyframes animation-card-2 {
+        from {
+            box-shadow: var(--border) 10px 10px 10px;
+        }
+        to {
+            box-shadow: var(--border) 0px 0px 0px;
+        }
+    }
+
+    .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: var(--radius-sm);
+        width: 100%;
+        height: 15rem;
+        background-color: var(--text-secondary);
+    }
+
+    .image p {
+        color: var(--surface);
+        margin: 0
+    }
+
+    .project-name {
+        color: var(--text);
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .description {
+        /* height: 11rem; */
+        overflow-y: auto;
+        font-size: 1.2rem;
+        font-weight: lighter;
+        margin: 0;
+    }
+
+    .technologies {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 1rem;
+        align-items: center;
+        color: var(--text);
+    }
+
+    .actually {
+        text-decoration: underline 2px;
+        font-weight: bold;
+        color: var(--text-secondary)
+    }
+
+    .icon {
+        color: var(--text-secondary)
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    a {
+        text-decoration: none;
+        border: 2px var(--primary) solid;
+        background-color: transparent;
+        padding-inline: 2rem;
+        padding-block: 0.5rem;
+        border-radius: 50px;
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+    
+    a:hover {
+        background-color: var(--primary);
+        color: var(--surface);
+        cursor: pointer;
+    }
+
+</style>
