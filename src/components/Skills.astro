@@ -1,0 +1,116 @@
+---
+import { Icon } from "astro-icon/components";
+
+const frontend = [
+    "Html", 
+    "Css", 
+    "TailwindCSS", 
+    "Typescript", 
+    "React", 
+    "Angular", 
+    "Next.Js", 
+    "Zustand", 
+    "Redux"
+]
+
+// Cantidad de copias del listado. Tienen que sobrar copias para que la pantalla
+// siempre quede llena: con 4 copias, al terminar un ciclo todavia hay 3 visibles.
+const copies = 4
+
+// Un ciclo = el ancho de una copia = 100% del track / copias
+const shift = `-${100 / copies}%`
+---
+
+<div class="container">
+    <h2>Habilidades</h2>
+    <div>
+        <p>FrontEnd</p>
+        <div class="marquee" style={`--shift: ${shift}`}>
+            <div class="marquee-track">
+                {Array.from({ length: copies }, (_, copy) => (
+                    <div class="marquee-group" aria-hidden={copy > 0 ? "true" : undefined}>
+                        {frontend.map(skill => (
+                            <div class="skill-card">
+                                <Icon name={`local:${skill}`} size={40} title={skill} class="icon"/>
+                                <p>{skill}</p>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .container{
+        margin-top: 6rem
+    }
+
+     .icon {
+        color: var(--text-secondary)
+    }
+
+    .marquee {
+        /* Separacion entre skills */
+        --gap: 4rem;
+        /* Tiempo que tarda en pasar una copia completa: MENOS = MAS RAPIDO */
+        --speed: 12s;
+
+        overflow: hidden;
+        /* Difumina los bordes para que las skills entren y salgan suavemente */
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent
+        );
+    }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: scroll var(--speed) linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+        animation-play-state: paused;
+    }
+
+    /* El gap va DENTRO del grupo (incluido el final) para que todas las copias
+       midan exactamente lo mismo y el corte del ciclo sea invisible */
+    .marquee-group {
+        display: flex;
+        gap: var(--gap);
+        padding-right: var(--gap);
+        flex-shrink: 0;
+    }
+
+    .skill-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skill-card p {
+        font-size: 1.5rem;
+        white-space: nowrap;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(var(--shift));
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .marquee-track {
+            animation: none;
+        }
+    }
+</style>
