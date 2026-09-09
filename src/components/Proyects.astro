@@ -39,7 +39,7 @@ const projects = [
     ];
 ---
 
-<div id="projects-container">
+<div id="projects-container" class="container">
     <h2>Proyectos</h2>
     <div class="projects">
         {projects.map( project => (
@@ -82,6 +82,9 @@ const projects = [
 
 
 <style>
+    .container {
+        margin-top: 5rem;
+    }
     .projects {
         display: flex;
         justify-content: space-between;

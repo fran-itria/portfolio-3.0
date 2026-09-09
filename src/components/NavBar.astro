@@ -67,10 +67,13 @@ import { Icon } from "astro-icon/components";
         font-weight: bold;
         text-decoration: none;
         user-select: none;
+        padding-inline: 0.5rem;
     }
     .texts a:hover {
        cursor: pointer;
-       text-decoration: underline
+       background-color: var(--primary);
+       color: var(--border);
+       border-radius: var(--radius-md);
     }
 </style>
 
@@ -82,6 +85,7 @@ import { Icon } from "astro-icon/components";
     const moon = document.querySelector<HTMLButtonElement>(".icon-moon")
     const sun = document.querySelector<HTMLButtonElement>(".icon-sun")
     const texts = document.querySelector<HTMLButtonElement>(".texts")
+    const buttons = document.querySelectorAll<HTMLElement>(".button-section")
 
     gsap.registerPlugin(SplitText)
 
@@ -112,5 +116,19 @@ import { Icon } from "astro-icon/components";
     })
     language?.addEventListener("click", () => {
         language.textContent = language.textContent == "Es" ? "En" : "Es"
+    })
+
+    let active: (HTMLElement | null) = null
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            if(active){
+                (active as HTMLElement).style.background = "";  
+                (active as HTMLElement).style.color = ""
+            }
+            active = button
+            button.style.background = "var(--primary)"   
+            button.style.color = "var(--border)"   
+            button.style.borderRadius = "var(--radius-md)"   
+        })
     })
 </script>
