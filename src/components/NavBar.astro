@@ -110,7 +110,7 @@ import { Icon } from "astro-icon/components";
         if(!moon || !sun || !language || !texts) return
         moon.style.display = "inline"
         sun.style.display = "none"
-        language.style = "color: var(--primary); border-color: var(--primary)"
+        language.style = "border-color: var(--primary)"
         texts.style = "color: var(--primary)"
         document.documentElement.setAttribute("data-theme", "light");
     })

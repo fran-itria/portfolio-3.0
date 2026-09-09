@@ -1,8 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import MatesParana from "../assets/Logo_MatesParana.webp"
+import MonaStudio from "../assets/Logo_MonaStudio.webp"
+
 const projects = [
         {
-            image: "/path/to/image1.jpg",
+            image: "",
+            alt: "Smart Store",
             name: "Smart Store",
             description: `Plataforma integral de gestión comercial y e-commerce, con control de productos, stock, ventas y cuotas.
                 Integración con Mercado Pago, GoCuotas y Correo Argentino. 
@@ -14,7 +19,8 @@ const projects = [
             code: "https://github.com/fran-itria/smart-store"
         },
         {
-            image: "/path/to/image1.jpg",
+            image: MatesParana,
+            alt: "Mates Paraná",
             name: "Mates Paraná",
             description: `Plataforma integral de gestión comercial y ventas para 
                 administrar productos, usuarios, pedidos y stock. 
@@ -26,7 +32,8 @@ const projects = [
             code: "https://github.com/fran-itria/MatesParana-Backend"
         },
         {
-            image: "/path/to/image1.jpg",
+            image: MonaStudio,
+            alt: "Mona Studio",
             name: "Mona Studio",
             description: `Desarrollo del backend de una plataforma de gestión comercial, 
                 con integración de pagos mediante Mercado Pago, 
@@ -44,10 +51,13 @@ const projects = [
     <div class="projects">
         {projects.map( project => (
             <div class="project-card">
-                {/* <Image /> */}
-                <div class="image">
-                    <p>Logo</p>
-                </div>
+                {project.image ? 
+                        <Image src={project.image as ImageMetadata} alt={project.alt} width={10000} height={500} class={"image"}/>
+                    :    
+                        <div class="image">
+                            <p>Logo</p>
+                        </div>
+                }
                 <p class="project-name" data-name="">{project.name}</p>
                     {
                         project.description.includes("Actualmente en desarrollo") 
@@ -129,7 +139,7 @@ const projects = [
         align-items: center;
         border-radius: var(--radius-sm);
         width: 100%;
-        height: 15rem;
+        height: 10rem;
         background-color: var(--text-secondary);
     }
 
